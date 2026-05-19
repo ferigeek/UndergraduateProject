@@ -1,3 +1,18 @@
 site_name: My Docs
 theme:
   name: material
+  language: fa
+extra:
+  alternate:
+    - name: English
+      link: /en/ 
+      lang: en
+    - name: فارسی
+      link: /fa/
+      lang: fa
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
