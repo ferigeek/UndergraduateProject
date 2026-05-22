@@ -25,44 +25,68 @@ flowchart TB
 
 Client[External Clients]
 
-API[API Layer]
+API[Spring Boot Backend]
 
-subgraph Core[Core Application]
-    Feed[Feed System]
-    Logic[Core Logic]
+subgraph Backend[Backend Core]
+    Auth[Auth Service]
+    User[User Service]
+    Post[Post Service]
+    Feed[Feed Service]
+    Logic[Business Logic]
 end
 
-Intel[Ranking & Intelligence]
+subgraph Intel[Python Intelligence Layer]
+    Rank[Recommendation Service]
+    Analytics[Analytics Jobs]
+    NLP[NLP Processing]
+end
+
+DB[(PostgreSQL Database)]
 
 subgraph Infra[Infrastructure]
-    Mon[Monitoring & Stats]
-    DB[(Database)]
+    Mon[Monitoring]
+
 end
 
 Client --> API
-API --> Core
-Core --> Feed
-Core --> DB
 
-Feed --> Intel
-Intel --> DB
-Intel --> Feed
+API --> Auth
+API --> User
+API --> Post
+API --> Feed
 
-Core --> Mon
+Feed --> Rank
+Rank --> Feed
+
+Auth --> DB
+User --> DB
+Post --> DB
+Feed --> DB
+
+Analytics --> DB
+NLP --> DB
+Rank --> DB
+
 API --> Mon
+Backend --> Mon
 Intel --> Mon
 DB --> Mon
 ```
 
 This software system is divided into separate components, each with specific responsibilities and implementation requirements. At a high level, the system consists of the following parts:
 
-- A core application and main service responsible for:
-    - Managing data, posts, and users
-    - Generating feeds for users
-- An intelligence service responsible for analyzing user behavior and determining recommended posts for users
-- A database and persistent data storage layer
+- A core backend application responsible for:
+    - Managing users and authentication
+    - Managing posts and user interactions (likes, comments, follows)
+    - Generating and serving user feeds
+    - Collecting and storing user behavioral events (logs)
+- An intelligence layer responsible for processing system data and producing analytical and machine learning-based outputs. This layer is divided into two main components:
+    - A recommendation service that ranks and scores posts based on user behavior, post features, and interaction history in order to generate personalized feeds
+    - An analytics service that processes historical user data in batch mode to extract system-wide insights such as active users, peak activity hours, trending posts, and engagement metrics
+- A database layer responsible for persistent storage of all core system data, including users, posts, interactions, and behavioral logs
+- An infrastructure and monitoring layer responsible for system observability, performance tracking, and operational metrics collection
 
-The primary focus of this project is on server-side operations, while other aspects may gradually be explored and implemented later if possible.
+The primary focus of this project is on server-side system design and data processing, while other aspects such as advanced analytics, optimization, and infrastructure enhancements may be gradually extended during later stages of development.
 
 ---
 

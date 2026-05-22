@@ -24,44 +24,67 @@ flowchart TB
 
 Client[External Clients]
 
-API[API Layer]
+API[Spring Boot Backend]
 
-subgraph Core[Core Application]
-    Feed[Feed System]
-    Logic[Core Logic]
+subgraph Backend[Backend Core]
+    Auth[Auth Service]
+    User[User Service]
+    Post[Post Service]
+    Feed[Feed Service]
+    Logic[Business Logic]
 end
 
-Intel[Ranking & Intelligence]
+subgraph Intel[Python Intelligence Layer]
+    Rank[Recommendation Service]
+    Analytics[Analytics Jobs]
+    NLP[NLP Processing]
+end
+
+DB[(PostgreSQL Database)]
 
 subgraph Infra[Infrastructure]
-    Mon[Monitoring & Stats]
-    DB[(Database)]
+    Mon[Monitoring]
 end
 
 Client --> API
-API --> Core
-Core --> Feed
-Core --> DB
 
-Feed --> Intel
-Intel --> DB
-Intel --> Feed
+API --> Auth
+API --> User
+API --> Post
+API --> Feed
 
-Core --> Mon
+Feed --> Rank
+Rank --> Feed
+
+Auth --> DB
+User --> DB
+Post --> DB
+Feed --> DB
+
+Analytics --> DB
+NLP --> DB
+Rank --> DB
+
 API --> Mon
+Backend --> Mon
 Intel --> Mon
 DB --> Mon
 ```
 
 این نرم افزار به قسمت‌های مجزایی تقسیم می‌شود که هرکدام وظیفه مشخصی دارند و با توجه به ویژگی‌ها و نیازمندی‌های خود پیاده سازی می‌شوند. به صورت کلی این سیستم چنین اجزایی دارد:
 
-- - سرویس اصلی و هسته سیستم که وظیفه آن شامل:  
-	- مدیریت داده، پست‌ها و کاربران  
-	- تولید feed برای کاربران
-- سرویس هوشمند که رفتار کاربران را تحلیل می‌کند و پست‌های پیشنهادی برای کاربران مشخص می‌کند.
-- پایگاه داده و ذخیره داده.
+- سرویس اصلی و هسته سیستم که وظیفه آن شامل:
+    - مدیریت کاربران و احراز هویت
+    - مدیریت داده‌ها، پست‌ها و تعاملات کاربران
+    - تولید و ارائه feed به کاربران
+    - جمع‌آوری رویدادهای رفتاری کاربران (logs)
+- سرویس هوشمند که رفتار کاربران و داده‌های سیستم را پردازش می‌کند و شامل دو بخش است:
+    - سیستم پیشنهاددهی (Recommendation Service) که با توجه به رفتار کاربر و ویژگی‌های پست‌ها، آن‌ها را رتبه‌بندی می‌کند و برای هر کاربر feed شخصی‌سازی‌شده تولید می‌کند
+    - سیستم تحلیل داده (Analytics Service) که به صورت آفلاین داده‌های رفتاری کاربران را تحلیل کرده و خروجی‌هایی مانند کاربران فعال، ساعات اوج فعالیت، پست‌های پرتعامل و موضوعات پرتکرار را استخراج می‌کند
+- پایگاه داده و ذخیره‌سازی اطلاعات که تمامی داده‌های اصلی سیستم و لاگ‌های رفتاری کاربران را نگهداری می‌کند
+- بخش زیرساخت و مانیتورینگ که وظیفه پایش عملکرد سیستم، بررسی خطاها و جمع‌آوری متریک‌های اجرایی را بر عهده دارد
 
-تمرکز بیشتر بر روی عملیات سمت سرور است و مسائل دیگر در ادامه در صورت امکان به تدریج مورد بررسی قرار میگیرند.
+تمرکز اصلی سیستم بر روی عملیات سمت سرور و پردازش داده‌ها است و سایر بخش‌ها به صورت تدریجی و در صورت نیاز توسعه داده خواهند شد.
 
 ---
 
