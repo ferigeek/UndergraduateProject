@@ -1,0 +1,47 @@
+@startuml
+autonumber
+
+actor User
+participant "Core Backend\n(Java)" as Backend
+database "PostgreSQL" as DB
+participant "Recommendation Service\n(Python)" as Recommendation
+
+User -> Backend: Request Smart Feed
+activate Backend
+
+Backend -> DB: Fetch Recent Candidate Posts
+activate DB
+DB --> Backend: Raw Post IDs
+deactivate DB
+
+alt Recommendation Service Available
+
+    Backend -> Recommendation: Send User Context and Post IDs
+    activate Recommendation
+
+    note over Recommendation: Rank posts based on user interests
+
+    Recommendation --> Backend: Ranked Post IDs
+    deactivate Recommendation
+
+else Recommendation Service Unavailable (Graceful Degradation)
+
+    note over Backend: Switch to chronological feed
+
+    Backend -> DB: Fetch Posts by Creation Time
+    activate DB
+    DB --> Backend: Chronological Post List
+    deactivate DB
+
+end
+
+Backend -> DB: Fetch Complete Post Data (Hydration)
+activate DB
+DB --> Backend: Full Post Objects
+deactivate DB
+
+Backend --> User: Return Final Feed
+
+deactivate Backend
+
+@enduml
