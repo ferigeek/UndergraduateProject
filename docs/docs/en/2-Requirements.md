@@ -285,7 +285,7 @@ If an auxiliary component experiences a downtime, the system transitions into a 
 
 ## System Architecture
 
-Detailed architectural breakdowns, system design patterns, and deployment topologies are thoroughly documented within the [[docs/en/3-Architecture|3-Architecture]] directory of the project documentation. This section transitions from high-level infrastructure layouts into the fine-grained implementation mechanics of individual system nodes.
+Detailed architectural breakdowns, system design patterns, and deployment topologies are thoroughly documented within the [3-Architecture.md](./3-Architecture.md) directory of the project documentation. This section transitions from high-level infrastructure layouts into the fine-grained implementation mechanics of individual system nodes.
 
 ## Repository Structure
 

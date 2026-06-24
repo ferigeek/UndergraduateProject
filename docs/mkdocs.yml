@@ -1,15 +1,61 @@
-site_name: My Docs
+site_name: Sarv
+site_url: https://ferigeek.github.io/sarv/
+docs_dir: docs
+site_dir: site
+
 theme:
   name: material
-  language: fa
+  language: en
+  features:
+    - navigation.tabs
+    - navigation.top
+    - search.suggest
+    - search.highlight
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+
+plugins:
+  - search
+  - i18n:
+      docs_structure: folder
+      languages:
+        - locale: en
+          name: English
+          build: true
+          default: true
+          nav:
+            - Home: index.md
+            - Proposal: 1-Proposal.md
+            - Requirements: 2-Requirements.md
+            - Architecture: 3-Architecture.md
+            - Database: 4-Database.md
+        - locale: fa
+          name: فارسی
+          build: true
+          default: false
+          theme:
+            direction: rtl
+          nav:
+            - خانه: index.md
+            - پیشنهادیه: 1-Proposal.md
+            - نیازمندی‌ها: 2-Requirements.md
+            - معماری: 3-Architecture.md
+            - پایگاه داده: 4-Database.md
+
+nav:
+  - index.md
+
 extra:
   alternate:
     - name: English
-      link: /en/ 
+      link: /en/
       lang: en
     - name: فارسی
       link: /fa/
       lang: fa
+
 markdown_extensions:
   - pymdownx.superfences:
       custom_fences:
