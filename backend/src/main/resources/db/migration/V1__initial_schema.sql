@@ -1,15 +1,15 @@
 -- Enum declarations
 CREATE TYPE gender_enum AS ENUM (
-	'male',
-	'female',
-	'rather_not_to_say'
+	'MALE',
+	'FEMALE',
+	'RATHER_NOT_TO_SAY'
 );
 
 CREATE TYPE user_status AS ENUM (
-    'active',
-    'suspended',
-    'banned',
-    'deleted'
+    'ACTIVE',
+    'SUSPENDED',
+    'BANNED',
+    'DELETED'
 );
 
 CREATE TYPE post_category AS ENUM (
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS public.users
     gender gender_enum,
     location character varying(30),
     profile_picture bigint,
-    status user_status NOT NULL DEFAULT 'active',
+    status user_status NOT NULL DEFAULT 'ACTIVE',
     PRIMARY KEY (id),
     UNIQUE (username),
     UNIQUE (email)
