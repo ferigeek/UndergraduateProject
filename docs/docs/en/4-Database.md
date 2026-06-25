@@ -8,7 +8,7 @@ The database is designed to support users, posts, interactions, media, and event
 ---
 ## Entity Relationship Diagram (ERD)
 
-![ERD](../database/erd.png)
+![ERD](../assets/erd.png)
 
 ---
 ## Core Entities
