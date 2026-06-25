@@ -2,8 +2,8 @@
 
 | لینک | مقدار |
 |------|--------|
-| مخزن گیت‌هاب | https://github.com/ferigeek/sarv |
-| مستندات | https://ferigeek.github.io/UndergraduateProject/ |
+| مخزن گیت‌هاب | [ferigeek/sarv](https://github.com/ferigeek/sarv) |
+| مستندات | [ferigeek.github.io/sarv](https://ferigeek.github.io/sarv) |
 
 ## فهرست مطالب
 

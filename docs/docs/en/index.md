@@ -2,8 +2,8 @@
 
 | Link | Value |
 |------|-------|
-| GitHub Repository | https://github.com/ferigeek/sarv |
-| Documentation | https://ferigeek.github.io/UndergraduateProject/ |
+| GitHub Repository | [ferigeek/sarv](https://github.com/ferigeek/sarv) |
+| Documentation | [ferigeek.github.io/sarv](https://ferigeek.github.io/sarv) |
 
 ## Table of Contents
 
